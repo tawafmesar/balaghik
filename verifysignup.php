@@ -6,75 +6,46 @@ session_start();
 include "connect.php";
 
 
+include "./includes/loginheader.php";
+if( isset($_SESSION['email']) ){
+
+  $email =  $_SESSION['email'];
+
 
 ?>
 
-<!DOCTYPE html>
-<html>
+<div class="containerVerify container" id="container">
+  <div class="form-container sign-up-container ">
+    
 
-<head>
-    <title>Verification Code</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <style>
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #ccc;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-}
-
-input {
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-    text-align: center;
-    margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-/* Style for active/focused input */
-input:focus {
-    outline: none;
-    border-color: #007bff;
-}
-
-/* Style for invalid input */
-input:invalid {
-    border-color: #dc3545;
-}
-
-/* Style for valid input */
-input:valid {
-    border-color: #28a745;
-}
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <form id="verifyForm" action="checkcodesignup.php" method="post">
+         <form id="verifyForm" action="checkcodesignup.php" method="post" style="flex-direction:inherit;">
             <input type="text" autofocus name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 1)">
             <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 2)">
             <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 3)">
             <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 4)">
             <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 0)">
         </form>
+        </div>
+
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                            <img src="./img/logo.png" width="60%" alt="">
+                    <h2>ادخل رمز التحقق الذي تم ارسالة الى بريدك الألكتروني</h2>
+                    <h1><?php echo   $email ; ?></h1>
+                </div>
+
+            </div>
+        </div>
     </div>
+
+    <script>container.classList.add("right-panel-active");
+</script>
+
+    <!-- partial -->
+    <script src="./js/login.js"></script>
+
 
 <script>
         const verificationFields = document.querySelectorAll('input');
@@ -114,10 +85,15 @@ input:valid {
 </html>
 
 
-
 <?php
 
+}else{
 
+    header('Location:login.php');
+
+
+
+}
 
 
 ob_end_flush();

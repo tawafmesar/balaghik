@@ -4,6 +4,8 @@
 
 
 include "../connect.php";
+include "../includes/forgetheader.php";
+
 
 
 ob_start();
@@ -33,57 +35,71 @@ if (!isset($_SESSION['user'])) {
             $password = sha1($_POST['password']);
             $data = array("user_password" => $password);
             updateData("users", $data, "user_email = '$email'");
-            echo "   تم تغيير كلمة المرور بنجاح";
-            header("refresh:2;url=../login.php");
+
+
+      echo "  <h1 class='succes'>
+                       تم تغيير كلمة المرور بنجاح
+
+            </h1>";
+            header("refresh:1.8;url=../login.php");
 
 
         }else{
 
-            echo "يجب كتابة كلمة المرور مرتين بطريقة صحيحة";
-        }
-
+      echo "  <h1 class='error'>
+            يجب كتابة كلمة المرور مرتين بطريقة صحيحة
+            </h1>";
+      header("refresh:1.5;url=resetpassword.php");
 
     }
 
 
+    }
 
-?>
-
-
-    <link rel="stylesheet" href="../css/log.css" />
-
-    <div class="containerlog"  dir="ltr">
+  include "../includes/forgetheader.php";
 
 
-      <div class="forms-container">
-
-        <div class="signin-signup">
-          <form  class="sign-in-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-
-            <h2  class="title">تسجيل الدخول</h2>
-
-            <div class="input-field">
-              <i class="fa-solid fa-circle-user"></i>
-              <input name="password" type="text" placeholder=" كلمة المرور"/>
-            </div>
-
-         <div class="input-field">
-              <i class="fa-solid fa-circle-user"></i>
-              <input name="repassword" type="text" placeholder="  اعد كتابة كلمة المرور" />
-            </div>
-
-            <input type="submit" value=" حفظ" class="btn solid" />
+  ?>
 
 
+<!-- partial:index.partial.html -->
+<div class="container" id="container">
+
+    
+    
+        <div class="form-container sign-in-container">
+          <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+    
+            <!-- <span>or use your account</span> -->
+            <input class="rtl" type="password" name="password" placeholder="كلمة المرور" required />
+            <input class="rtl" type="password" name="repassword" placeholder="كلمة المرور" required />
+
+            <button name="login"> تسجيل دخول</button>
           </form>
-
+        </div>
+    
+        <div class="overlay-container">
+          <div class="overlay">
+            <div class="overlay-panel overlay-left">
+              <h1>Welcome Back!</h1>
+              <p>To keep connected with us please login with your personal info</p>
+              <button class="ghost" id="signIn">تسجيل دخول</button>
+            </div>
+    
+            <div class="overlay-panel overlay-right">
+                      <img src="../img/logo.png" width="60%" alt="">
+              <h1>لأعادة تعيين كلمة المرور</h1>
+              <p > يجب ان كون كلمة المرور عدد حروف اكثر من 6</p>
+            </div>
+          </div>
         </div>
       </div>
-
-
-
-    </div>
-
+    
+    
+      <!-- partial -->
+      <script src="./js/login.js"></script>
+    
+      </body>
 
 
 

@@ -5,10 +5,11 @@ session_start();
 
 include "connect.php";
 
+include "./includes/loginheader.php";
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_SESSION['email']) && $_SESSION['approve'] == 1 ) {
-        //if (isset($_SESSION['email']) && isset($_SESSION['verfiycode']) && $_SESSION['approve'] ==1 ) {
 
 
 
@@ -51,27 +52,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 
                     $_SESSION['approve'] = 2 ; // register user id in session
 
-            // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-            // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-            // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-
-            // If not all fields are filled, redirect back to the verification page.
 
 
-                printFailure("is Correct");
+            echo "  <h1 class='succes'>
+            تم تفعيل الحساب بنجاح
+
+                        </h1>";
+
+            header("refresh:1.8;url=login.php");
+
 
 
 
 
             } else {
-                printFailure("verifycode not Correct");
-                // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-                // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-                // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-              
-                // If not all fields are filled, redirect back to the verification page.
+                        echo "  <h1 class='error'>
+                        رمز التأكيد الذي ادخلته غير صحيح
 
-                header("Location: verifysignup.php");
+                        </h1>";
+
+                       header("refresh:1.8;url=verifysignup.php");
+
                 exit;
 
             }
@@ -90,9 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
    
-
-
-
 
 } else {
 
