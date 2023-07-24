@@ -1,5 +1,3 @@
-
-
 <?php
 ob_start();
 session_start();
@@ -8,120 +6,94 @@ session_start();
 include "../connect.php";
 
 
+include "../includes/forgetheader.php";
+if (isset($_SESSION['emailresetpassword'])) {
 
-?>
+    $email = $_SESSION['emailresetpassword'];
 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Verification Code</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    ?>
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 2px solid #ccc;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
+    <div class="containerVerify container" id="container">
+      <div class="form-container sign-up-container ">
+    
 
-        input {
-            width: 40px;
-            height: 40px;
-            font-size: 24px;
-            text-align: center;
-            margin: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+             <form id="verifyForm" action="checkcodereset.php" method="post" style="flex-direction:inherit;">
+                <input type="text" autofocus name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 1)">
+                <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 2)">
+                <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 3)">
+                <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 4)">
+                <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 0)">
+            </form>
+            </div>
 
-        /* Style for active/focused input */
-        input:focus {
-            outline: none;
-            border-color: #007bff;
-        }
 
-        /* Style for invalid input */
-        input:invalid {
-            border-color: #dc3545;
-        }
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                                <img src="../img/logo.png" width="60%" alt="">
 
-        /* Style for valid input */
-        input:valid {
-            border-color: #28a745;
-        }
-    </style>
-</head>
+                        <h2>ادخل رمز التحقق الذي تم ارسالة الى بريدك الألكتروني</h2>
+                        <h1><?php echo $email; ?></h1>
+                    </div>
 
-<body>
-    <div class="container">
-        <form id="verifyForm" action="checkcodereset.php" method="post">
-            <input type="text" autofocus name="code[]" maxlength="1" pattern="[0-9]" required
-                oninput="moveToNext(this, 1)">
-            <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 2)">
-            <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 3)">
-            <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 4)">
-            <input type="text" name="code[]" maxlength="1" pattern="[0-9]" required oninput="moveToNext(this, 0)">
-        </form>
-    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>container.classList.add("right-panel-active");
+    </script>
+
+        <!-- partial -->
+        <script src="./js/login.js"></script>
+
 
     <script>
-        const verificationFields = document.querySelectorAll('input');
+            const verificationFields = document.querySelectorAll('input');
 
-        // Function to move focus to the next input field
-        function moveToNext(currentField, nextFieldIndex) {
-            const maxLength = parseInt(currentField.getAttribute('maxlength'));
+            // Function to move focus to the next input field
+            function moveToNext(currentField, nextFieldIndex) {
+                const maxLength = parseInt(currentField.getAttribute('maxlength'));
 
-            if (currentField.value.length >= maxLength) {
-                const nextField = verificationFields[nextFieldIndex];
-                if (nextField) {
-                    nextField.focus();
+                if (currentField.value.length >= maxLength) {
+                    const nextField = verificationFields[nextFieldIndex];
+                    if (nextField) {
+                        nextField.focus();
+                    }
                 }
             }
-        }
 
-        // Function to check if all fields are filled
-        function allFieldsFilled() {
-            return Array.from(verificationFields).every(field => field.value !== '');
-        }
-
-        // Function to handle form submission
-        function handleFormSubmission() {
-            if (allFieldsFilled()) {
-                const codeValues = Array.from(verificationFields).map(field => parseInt(field.value, 10));
-                verifyForm.elements["code[]"].value = codeValues;
-                verifyForm.submit();
+            function allFieldsFilled() {
+                return Array.from(verificationFields).every(field => field.value !== '');
             }
-        }
 
-        // Attach event listeners to each input field to handle the input
-        verificationFields.forEach(field => {
-            field.addEventListener('input', handleFormSubmission);
-        });
-    </script>
-</body>
+            // Function to handle form submission
+            function handleFormSubmission() {
+                if (allFieldsFilled()) {
+                const codeValues = Array.from(verificationFields).map(field => parseInt(field.value, 10));
+                 verifyForm.elements["code[]"].value = codeValues; 
+                 verifyForm.submit();            }
+            }
 
-</html>
+            // Attach event listeners to each input field to handle the input
+            verificationFields.forEach(field => {
+                field.addEventListener('input', handleFormSubmission);
+            });
+        </script>
+    </body>
+
+    </html>
+
+
+    <?php
+
+} else {
+
+    header('Location:login.php');
 
 
 
-<?php
-
-
+}
 
 
 ob_end_flush();

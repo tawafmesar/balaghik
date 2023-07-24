@@ -4,6 +4,7 @@ session_start();
 
 
 include "../connect.php";
+include "../includes/forgetheader.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -12,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_SESSION['emailresetpassword']; // register session name
 
         $code = $_POST['code'];
-
 
 
         $concatenatedValue = implode("", $code);
@@ -33,36 +33,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_SESSION['approve'] = 2; // register user id in session
 
-            // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-            // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-            // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
 
-            // If not all fields are filled, redirect back to the verification page.
-
-
-            echo "     تم التحقق بنجاح   ";
-
-            header("refresh:3;url=resetpassword.php");
-
-
-
-
+            header('Location: resetpassword.php');
+            exit();
 
 
 
         } else {
-         //   printFailure("verifycode not Correct");
-            // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-            // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-            // hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
 
-            // If not all fields are filled, redirect back to the verification page.
+            echo "  <h1 class='error'>
+                        رمز التأكيد الذي ادخلته غير صحيح
 
-            echo "   الرمز الذي ادخلته غير صحيح   ";
+                        </h1>";
 
-
-
-                    header("refresh:3;url=verifycode.php");
+            header("refresh:1.8;url=verifycode.php");
 
 
             exit;

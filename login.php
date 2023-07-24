@@ -28,7 +28,9 @@ if (!isset($_SESSION['user'])) {
       $count = $stmt->rowCount();
 
       if ($count > 0) {
-        echo "لم يتم تفعيل الحساب ";
+        echo "  <h1 class='error'>
+    لم يتم تفعيل الحساب
+            </h1>";
 
 
         $verfiycode = rand(10000, 99999);
@@ -36,11 +38,11 @@ if (!isset($_SESSION['user'])) {
         $data = array("user_verifycode" => $verfiycode);
         updateData("users", $data, "user_email = '$email'");
 
-        // sendEmail($email, "Verfiy Code Ecommerce", "Verfiy Code $verfiycode");
+         sendEmail($email, "Verfiy Code Ecommerce", "Verfiy Code $verfiycode");
 
         $_SESSION['email'] = $email; // register user id in session
 
-       // header("refresh:3;url=verifysignup.php");
+       header("refresh:1.8;url=verifysignup.php");
 
 
       }else{
@@ -52,27 +54,31 @@ if (!isset($_SESSION['user'])) {
 
         if ($count2 > 0) {
 
-          echo "   تم تسجيل الدخول بنجاح ";
+          echo "  <h1 class='succes'>
+            تم تسجيل الدخول بنجاح 
+            </h1>";
 
 
           $_SESSION['userid'] = $get['user_id']; // register user id in session
           $_SESSION['user'] = $get['user_name']; // register user id in session
           $_SESSION['useremail'] = $get['user_email']; // register user id in session
-          
-          //        header("refresh:3;url=index.php");
+          header("refresh:1.5;url=index.php");
+
 
 
         }else{
-          echo "   البريد الاكتروني او كلمة المرور غير صحيحه ";
 
+
+          echo "  <h1 class='error'>
+            البريد الاكتروني او كلمة المرور غير صحيحه 
+            </h1>";
+                  header("refresh:1.5;url=login.php");
 
 
         }
 
 
       }
-
-
 
 
 
@@ -106,10 +112,12 @@ if (!isset($_SESSION['user'])) {
 
       if ($count > 0) {
 
-        printFailure("البريد الألكنروني الذي ادخلته موجود مسبقاً ");
-// hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-// hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
-// hqihv wk],r jkfddddd اضهار صندوق تنبية ضروري هنااااااااااااااااااااا
+        echo "  <h1 class='error'>
+        البريد الألكنروني الذي ادخلته موجود مسبقاً 
+            </h1>";
+        header("refresh:1.5;url=login.php");
+
+
 
       } else {
 
@@ -120,7 +128,7 @@ if (!isset($_SESSION['user'])) {
           "user_verifycode" => $verfiycode,
         );
 
-       // sendEmail($email, "قم بتفعيل حسابك عن طريق رمز التحقق التالي :  $verfiycode", "رمز التحقق");
+        sendEmail($email, "قم بتفعيل حسابك عن طريق رمز التحقق التالي :  $verfiycode", "رمز التحقق");
 
         $countt = insertData("users", $data);
 
@@ -131,111 +139,72 @@ if (!isset($_SESSION['user'])) {
 
           header('Location:verifysignup.php');
 
-
-
         }
-
-
       }
-
       // signup signup signup signup 
 
   }
 
-
 }
 
-?>
+
+  include "./includes/loginheader.php";
 
 
-    <link rel="stylesheet" href="css/log.css" />
+  ?>
 
-    <div class="containerlog"  dir="ltr">
+<!-- partial:index.partial.html -->
+<div class="container" id="container">
+  <div class="form-container sign-up-container">
+    <form  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" >
+			<h1>إنشاء حساب</h1>
 
-
-      <div class="forms-container">
-
-        <div class="signin-signup">
-          <form  class="sign-in-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-
-            <h2  class="title">تسجيل الدخول</h2>
-
-            <div class="input-field">
-              <i class="fa-solid fa-circle-user"></i>
-              <input name="email" type="text" placeholder=" البريد الألكتروني"required />
-            </div>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <input name="password" type="password" placeholder="الرقم السري" required/>
-            </div>
-           <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <a href="./forgetpassword/checkemail.php"></a>
-            </div>
-            <input name="login" type="submit" value="تسجيل دخول" class="btn solid" />
+			<!-- <span>or use your email for registration</span> -->
+			<input class="rtl" type="text" name="username" placeholder="الأسم" required />
+			<input class="rtl" type="email" name="email" placeholder="البريد الألكتروني" required/>
+			<input  class="rtl" type="password" name="password" placeholder="كلمة المرور" required/>
+			<button name="signup">إنشاء</button>
+		</form>
+	</div>
 
 
+	<div class="form-container sign-in-container">
+		<form  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" >
+			<h1> تسجيل الدخول</h1>
 
-          </form>
+			<!-- <span>or use your account</span> -->
+			<input class="rtl" type="email" name="email" placeholder="البريد الألكتروني" required/>
+			<input class="rtl" type="password" name="password" placeholder="كلمة المرور" required/>
+			<a href="./forgetpassword/checkemail.php">هل نسيت كلمة المرور ؟</a>
+			<button name="login" > تسجيل دخول</button>
+		</form>
+	</div>
 
-          <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="sign-up-form signup">
-            <h2 class="title">تسجيل جديد</h2>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+        <img src="./img/logo.png" width="60%" alt="">
+        				<h3>لديك حساب يمكنك تسجيل الدخول</h3>
 
-            <div class="input-field">
-              <i class="fa-solid fa-circle-user"></i>
-              <input name="username" type="text" placeholder="اسم المستخدم" />
-            </div>
+				<button class="ghost" id="signIn">تسجيل دخول</button>
+			</div>
+			
+			<div class="overlay-panel overlay-right">
 
-            <div class="input-field">
-            <i class="fa-solid fa-at"></i>
-              <input name="email" type="email" required placeholder="الأيميل" />
-            </div>
+        <img src="./img/logo.png" width="60%" alt="">
+        				<h3>ليس لديك حساب يمكنك إنشاء حساب جديد</h3>
 
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <input name="password" type="password" required placeholder="الرمز السري" />
-            </div>
-
-            <input type="submit" name="signup" class="btn" value="تسجيل جديد" />
-
-          </form>
-        </div>
-      </div>
-
-
-      <div class="panels-container">
-        <div class="panel left-panel" >
-          <div class="content" style="margin:auto; margin-top:55px;" >
-            <h3> هل انت جديد هنا ؟</h3>
-            <p>
-ان كنتِ مدربة او متدربة يمكن إنشاء حساب جديد من هنا
-            </p>
-            <button class="btn transparent" id="sign-up-btn">
-              تسجيل جديد
-            </button>
-          </div>
-          <img src="img/log.png"  class="image siz"  alt=""   data-aos="zoom-out-up"/>
-        </div>
-        <div class="panel right-panel">
-          <div class="content marg" >
-            <h3>
-              مسجل مسبقاً معنا ؟
-            </h3>
-            <p>
-            اذا تم إنشاء حساب مسبقاً يمكنكم تسجيل الدخول من هنا...
-            </p>
-            <button class="btn transparent" id="sign-in-btn">
-              تسجيل دخول
-            </button>
-          </div>
-          <img src="img/reg.png"  class="image" alt="" />
-        </div>
-      </div>
-
-    </div>
+				<button  class="ghost" id="signUp">إنشاء حساب</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
+<!-- partial -->
+  <script  src="./js/login.js"></script>
 
+</body>
 
 
     <?php
@@ -248,6 +217,6 @@ if (!isset($_SESSION['user'])) {
 
 
   }
-      include 'include/footer.php';
+
       ob_end_flush();
       ?>
