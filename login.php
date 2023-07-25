@@ -10,7 +10,6 @@ include "connect.php";
 if (!isset($_SESSION['user'])) {
 
 
-  // check if user coming from http post request
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

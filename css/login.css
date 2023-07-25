@@ -27,12 +27,14 @@ h2 {
 	text-align: center;
 }
 .error{
+
 	font-size: 28px;
 		border: 2px solid #FF4B2B;
 	color: #FF4B2B;
 }
 .succes{
 	font-size: 28px;
+
 		border: 2px solid #2b5dff;
 	color: #2b5dff;
 }
