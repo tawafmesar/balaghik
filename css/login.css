@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url("https://fonts.googleapis.com/css?family=Cairo:100,300,400,500,700,900");
 
 * {
 	box-sizing: border-box;
@@ -10,7 +10,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Cairo', Cairo;
 	height: 100vh;
 	margin: -20px 0 50px;
 }
@@ -35,8 +35,8 @@ h2 {
 .succes{
 	font-size: 28px;
 
-		border: 2px solid #2b5dff;
-	color: #2b5dff;
+		border: 2px solid #009688;
+	color: #009688;
 }
 
 p {
@@ -226,20 +226,7 @@ a {
 	transform: translateX(20%);
 }
 
-.social-container {
-	margin: 20px 0;
-}
 
-.social-container a {
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 5px;
-	height: 40px;
-	width: 40px;
-}
 
 .rtl{
 	direction: rtl;
@@ -282,3 +269,4 @@ a {
 .containerVerify input:valid {
     border-color: #28a745;
 }
+

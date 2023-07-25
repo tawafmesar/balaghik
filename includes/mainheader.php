@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard</title>
+  <title>بلاغك   -   Balaghik</title>
   <link rel="stylesheet" href="css/all.min.css" />
   <link rel="stylesheet" href="css/framework.css" />
   <link rel="stylesheet" href="css/master.css" />
@@ -21,31 +21,31 @@
       <div class="logoo"> <img src="./img/logo.png"></div>
       <ul>
         <li>
-          <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="index.html">
-            <i class="fa-regular fa-chart-bar fa-fw"></i>
+          <a  id="index" class="d-flex align-center fs-14 c-black rad-6 p-10" href="index.php">
+            <i  class="fa-regular fa-chart-bar fa-fw"></i>
             <span>الصفحة الرئيسية</span>
           </a>
         </li>
         <li>
-          <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="#">
+          <a  id="add" class="d-flex align-center fs-14 c-black rad-6 p-10" href="add.php">
             <i class="fa-solid fa-gear fa-fw"></i>
             <span>إضافة بلاغ</span>
           </a>
         </li>
         <li>
-          <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="#">
+          <a id="reports" class="d-flex align-center fs-14 c-black rad-6 p-10" href="#">
             <i class="fa-regular fa-user fa-fw"></i>
             <span>البلاغات</span>
           </a>
         </li>
         <li>
-          <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="#">
+          <a  id="contact"  class="d-flex align-center fs-14 c-black rad-6 p-10" href="#">
             <i class="fa-solid fa-diagram-project fa-fw"></i>
             <span>تواصل معنا</span>
           </a>
         </li>
         <li>
-          <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="#">
+          <a  id="account"   class="d-flex align-center fs-14 c-black rad-6 p-10" href="#">
             <i class="fa-solid fa-graduation-cap fa-fw"></i>
             <span>الحساب</span>
           </a>

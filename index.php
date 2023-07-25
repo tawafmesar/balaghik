@@ -74,6 +74,15 @@ if (isset($_SESSION['user'])) {
   </body>
 </html>
 
+
+            <script>
+
+
+            const activee = document.getElementById('index');
+                  activee.classList.add("active");
+
+
+</script>
 <?php
 } else {
   include "./includes/loginheader.php";
