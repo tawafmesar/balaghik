@@ -33,13 +33,13 @@
           </a>
         </li>
         <li>
-          <a id="reports" class="d-flex align-center fs-14 c-black rad-6 p-10" href="#">
+          <a id="reports" class="d-flex align-center fs-14 c-black rad-6 p-10" href="reports.php">
             <i class="fa-regular fa-user fa-fw"></i>
             <span>البلاغات</span>
           </a>
         </li>
         <li>
-          <a  id="contact"  class="d-flex align-center fs-14 c-black rad-6 p-10" href="#">
+          <a  id="contact"  class="d-flex align-center fs-14 c-black rad-6 p-10" href="contact.php">
             <i class="fa-solid fa-diagram-project fa-fw"></i>
             <span>تواصل معنا</span>
           </a>
