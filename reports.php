@@ -76,6 +76,7 @@ if (isset($_SESSION['user'])) {
 
                     echo "</td>";
                     echo "</tr>";
+                    $counter =$counter+ 1;
                   }
 
                   ?>
@@ -90,7 +91,7 @@ if (isset($_SESSION['user'])) {
         <?php
 
     } else {
-      echo "<div class='add container' style='width: 80%;'>";
+      echo "<div class='add container' style='width: 100%;'>";
 
 
       echo "  <h1 class='succes'>
@@ -190,7 +191,7 @@ if (isset($_SESSION['user'])) {
   }
   // end edit page
   elseif ($do == 'Update') { // start update page
-    echo "<div class='add container' style='width: 80%;'>";
+    echo "<div class='add container' style='width: 100%;'>";
 
     // check if user come from forms or any page
 
@@ -242,7 +243,7 @@ if (isset($_SESSION['user'])) {
   } // end update page
   elseif ($do == 'Delete') { //  start delelt member page
 
-    echo "<div class='add container' style='width: 80%;'>";
+    echo "<div class='add container' style='width: 100%;'>";
 
 
     $reportid = (isset($_GET['report_id']) && is_numeric($_GET['report_id'])) ? intval($_GET['report_id']) : 0;
@@ -315,7 +316,7 @@ if (isset($_SESSION['user'])) {
   include "./includes/loginheader.php";
 
   echo "  <h1 class='error'>
-    للدخول يجب عليك تتسجيل الدخول
+    للدخول الى هذه الصفحة يجب عليك تسجيل الدخول
             </h1>";
 
   header("refresh:1.8;url=login.php");

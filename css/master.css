@@ -131,6 +131,10 @@ ul {
 .shaking {
   animation: shake 3s linear infinite;
 }
+
+.labell{
+  width:100%; text-align: right; margin-top:7px;
+}
 /* Start Content */
 .content {
   overflow: hidden;

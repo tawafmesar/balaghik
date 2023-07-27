@@ -129,7 +129,7 @@ if (isset($_SESSION['user'])) {
   include "./includes/loginheader.php";
 
   echo "  <h1 class='error'>
-    للدخول يجب عليك تتسجيل الدخول
+    للدخول الى هذه الصفحة يجب عليك تسجيل الدخول
             </h1>";
 
   header("refresh:1.8;url=login.php");

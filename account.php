@@ -16,118 +16,22 @@ if (isset($_SESSION['user'])) {
     // $_SESSION['user'] = $get['user_name']; // register user id in session
     // $_SESSION['useremail'] = $get['user_email']; // register user id in session
 
-    $do = isset($_GET['do']) ? $_GET['do'] : 'manage';
+    $do = isset($_GET['do']) ? $_GET['do'] : 'Edit';
+
+    if ($do == 'Edit') { //start edite page
 
 
-    if ($do == 'manage') {
 
-        $stmt = $con->prepare("SELECT * FROM reports WHERE report_user = ?   ");
+
+
+        $stmt = $con->prepare("SELECT * FROM users WHERE user_id  = ?   LIMIT 1 ");
+
+
         $stmt->execute(array($userid));
-        $count2 = $stmt->rowCount();
-        $rows = $stmt->fetchall();
-
-
-        if (!empty($rows)) {
-
-
-
-
-            ?>
-
-
-
-            <div class="content w-full">
-
-                <!-- Start add -->
-                <br><br><br><br>
-                <div class="add" style="height: auto;">
-
-                    <!-- Start Projects Table -->
-                    <div class="projects p-20 bg-white rad-10 m-20">
-                        <h2 class="mt-0 mb-20">البلاغات</h2>
-                        <div class="responsive-table">
-                            <table class="fs-15 w-full">
-                                <thead>
-                                    <tr>
-                                        <td>رقم البلاغ</td>
-
-                                        <td>رقم الطلب</td>
-                                        <td>المشكلة</td>
-                                        <td>ملاحظة</td>
-                                        <td>التحكم</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-
-                                    <?php
-                                    $counter = 1;
-
-                                    foreach ($rows as $row) {
-                                        echo "<tr>";
-                                        echo "<td>" . $counter . "</td>"; // New column for loop count
-                                        echo "<td>" . $row['report_number'] . "</td>";
-                                        echo "<td>" . $row['report_main'] . "</td>";
-                                        echo "<td>" . $row['report_details'] . "</td>";
-
-                                        echo "<td>
-              <a href='?do=Edit&report_id=" . $row['report_id'] . "' class=' btn btn-success'>تعديل  &nbsp; <i class='fa fa-edit green' ></i></a>   &nbsp; &nbsp; 
-             | &nbsp; &nbsp;   <a href='?do=Delete&report_id=" . $row['report_id'] . "' class='btn btn-danger confirm'>  حذف  &nbsp;<i class='fa fa-trash red' ></i></a>";
-
-
-
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-
-                                    ?>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- End Projects Table -->
-                </div>
-
-                <?php
-
-        } else {
-            echo "<div class='add container' style='width: 80%;'>";
-
-
-            echo "  <h1 class='succes'>
-      لايوجد بيانات ليتم عرضها
-            </h1>";
-
-
-            echo "</div>";
-
-        }
-
-        ?>
-
-
-    <?php // end manage members page
-        // start members page
-    }
-    
-    elseif ($do == 'Edit') { //start edite page
-
-
-
-        $reportid = (isset($_GET['report_id']) && is_numeric($_GET['report_id'])) ? intval($_GET['report_id']) : 0;
-
-
-        $stmt = $con->prepare("SELECT * FROM reports WHERE report_id  = ?  AND report_user = ? LIMIT 1 ");
-
-
-        $stmt->execute(array($reportid, $userid));
 
 
         $row = $stmt->fetch();
 
-        // the row coun
 
         $count = $stmt->rowCount();
 
@@ -144,24 +48,34 @@ if (isset($_SESSION['user'])) {
 
                         <div class="form-container sign-up-container">
                             <form action="?do=Update" method="post">
-                                <input type="hidden" name="reportid" value="<?php echo $reportid; ?>">
+                                <input type="hidden" name="userid" value="<?php echo $userid; ?>">
+                                
+                                <div class="labell">   <label>البريد الألكتروني</label> (لايمكن تعديله)</div>
+                                <input disabled class="rtl" type="text" name="user_email" placeholder="البريد الألكتروني"
+                                    value="<?php echo $row['user_email']; ?>" required />
+                                 
+                                    <div class="labell">   <label> اسمك الكامل</label></div>
+                                 <input class="rtl" type="text" name="user_name" placeholder="اسمك الكامل"
+                                    value="<?php echo $row['user_name']; ?>" required />
+                               
+                                    <div class="labell" >   <label> رقم الجوال </label></div>
+                                 <input class="rtl" type="text" name="user_phone" placeholder="رقم الجوال"
+                                    value="<?php echo $row['user_phone']; ?>"  />
 
-                                <input class="rtl" type="text" name="number" placeholder="رقم الطلب"
-                                    value="<?php echo $row['report_number']; ?>" required />
-                                <input class="rtl" type="text" name="main" placeholder="المشكلة"
-                                    value="<?php echo $row['report_main']; ?>" required />
-                                <textarea name="details" id="details" cols="30" rows="10"
-                                    placeholder="ملاحظة"><?php echo $row['report_details']; ?></textarea>
-                                <button name="add">حفظ</button>
+                                    <div class="labell" >   <label>  المدينة</label> </div>
+                                 <input class="rtl" type="text" name="user_city" placeholder="المدينة"
+                                    value="<?php echo $row['user_city']; ?>"
+                                         />
+
+                                    <button name="add">حفظ</button>
                             </form>
                         </div>
-
 
                         <div class="overlay-container">
                             <div class="overlay">
                                 <div class="overlay-panel overlay-left">
                                     <img src="./img/logo.png" width="60%" alt="">
-                                    <h1> تعديل بلاغ</h1>
+                                    <h1> بيانات حسابي</h1>
 
                                 </div>
 
@@ -185,9 +99,10 @@ if (isset($_SESSION['user'])) {
 
             echo "<div class='container'>";
 
-            $theMsg = '<div class="alert alert-danger">Theres no such ID</div>';
+            $theMsg = '<div class="alert alert-danger">لايمكنك الدخول الى هذه الصفحة</div>';
 
             //redirectHome($theMsg, 4);
+            echo $theMsg ;
 
             echo "</div>";
 
@@ -195,7 +110,7 @@ if (isset($_SESSION['user'])) {
     }
     // end edit page
     elseif ($do == 'Update') { // start update page
-        echo "<div class='add container' style='width: 80%;'>";
+        echo "<div class='add container' style='width: 100%;'>";
 
         // check if user come from forms or any page
 
@@ -205,19 +120,16 @@ if (isset($_SESSION['user'])) {
 
             $formErrors = array();
 
-            $reportid = $_POST['reportid'];
-            $userid = $_SESSION['userid'];
-            $number = $_POST['number'];
-            $main = $_POST['main'];
-            $details = $_POST['details'];
+            $userid = $_POST['userid'];
+
+            $name = $_POST['user_name'];
+            $phone = $_POST['user_phone'];
+            $city = $_POST['user_city'];
 
 
 
-
-
-
-            $stmt = $con->prepare("UPDATE reports SET report_number = ? , report_main = ? , report_details = ?  WHERE report_id = ?  ");
-            $stmt->execute(array($number, $main, $details, $reportid));
+            $stmt = $con->prepare("UPDATE users SET user_name = ? , user_phone = ? , user_city = ?  WHERE user_id = ?  ");
+            $stmt->execute(array($name, $phone, $city, $userid));
             $count2 = $stmt->rowCount();
 
 
@@ -225,11 +137,12 @@ if (isset($_SESSION['user'])) {
             if ($count2 > 0) {
 
 
-                echo "  <h1 class='succes' id='hide'>
+            echo "  <h1 class='succes' id='hide'>
             تم التعديل بنجاح
             </h1>";
 
-                header("refresh:1.5;url=reports.php");
+
+                header("refresh:1.5;url=account.php");
 
             }
 
@@ -247,7 +160,7 @@ if (isset($_SESSION['user'])) {
     } // end update page
     elseif ($do == 'Delete') { //  start delelt member page
 
-        echo "<div class='add container' style='width: 80%;'>";
+        echo "<div class='add container' style='width: 100%;'>";
 
 
         $reportid = (isset($_GET['report_id']) && is_numeric($_GET['report_id'])) ? intval($_GET['report_id']) : 0;
@@ -320,7 +233,7 @@ if (isset($_SESSION['user'])) {
     include "./includes/loginheader.php";
 
     echo "  <h1 class='error'>
-    للدخول يجب عليك تسجيل الدخول
+    للدخول الى هذه الصفحة يجب عليك تسجيل الدخول
             </h1>";
 
     header("refresh:1.8;url=login.php");
