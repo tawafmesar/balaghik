@@ -37,7 +37,7 @@ if (!isset($_SESSION['user'])) {
         $data = array("user_verifycode" => $verfiycode);
         updateData("users", $data, "user_email = '$email'");
 
-         sendEmail($email, "Verfiy Code Ecommerce", "Verfiy Code $verfiycode");
+        sendEmail($email, "قم بتفعيل حسابك عن طريق رمز التحقق التالي :  $verfiycode", "رمز التحقق");
 
         $_SESSION['email'] = $email; // register user id in session
 
@@ -159,8 +159,8 @@ if (!isset($_SESSION['user'])) {
 			<h1>إنشاء حساب</h1>
 
 			<!-- <span>or use your email for registration</span> -->
-			<input class="rtl" type="text" name="username" placeholder="الأسم" required />
-			<input class="rtl" type="email" name="email" placeholder="البريد الألكتروني" required/>
+			<input class="rtl" type="text" name="username" placeholder="الأسم" required autocomplete="off"/>
+			<input class="rtl" type="email" name="email" autocomplete="off" placeholder="البريد الألكتروني" required/>
 			<input  class="rtl" type="password" name="password" placeholder="كلمة المرور" required/>
 			<button name="signup">إنشاء</button>
 		</form>
@@ -172,7 +172,7 @@ if (!isset($_SESSION['user'])) {
 			<h1> تسجيل الدخول</h1>
 
 			<!-- <span>or use your account</span> -->
-			<input class="rtl" type="email" name="email" placeholder="البريد الألكتروني" required/>
+			<input class="rtl" type="email" name="email" autocomplete="off" placeholder="البريد الألكتروني" required/>
 			<input class="rtl" type="password" name="password" placeholder="كلمة المرور" required/>
 			<a href="./forgetpassword/checkemail.php">هل نسيت كلمة المرور ؟</a>
 			<button name="login" > تسجيل دخول</button>
