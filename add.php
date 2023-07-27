@@ -75,11 +75,11 @@ if (isset($_SESSION['user'])) {
 <div class="container" id="container">
 
   <div class="form-container sign-up-container">
-    <form  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+            <form  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 <!-- <h1>إنشاء حساب</h1> -->
         
                 <!-- <span>or use your email for registration</span> -->
-                <input class="rtl" type="number" name="number" placeholder="رقم الطلب" required />
+                <input class="rtl" type="text" name="number" placeholder="رقم الطلب" required />
                 <input class="rtl" type="text" name="main" placeholder="المشكلة" required />
                 <textarea name="details" id="details" cols="30" rows="10"  placeholder="ملاحظة" ></textarea>
                 <button name="add">إضافة</button>

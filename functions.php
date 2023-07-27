@@ -215,17 +215,15 @@ function sendEmail($email ,  $body , $subject)
     $mail = new PHPMailer(true);
 
     try {
-
-
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'balaghikk@gmail.com';
-        $mail->Password = 'corpsxlgqsczqrvv';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->Username = 'balaghikk@gmail.com'; // Update the email here
+        $mail->Password = 'covpmhmdrwoqecxl'; // Update the password here
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = 465;
 
-        $mail->setFrom('hajkashal@gmail.com');
+        $mail->setFrom('balaghikk@gmail.com'); // You may want to keep this as the sender
         $mail->addAddress($email);
 
         $mail->isHTML(false);
@@ -245,7 +243,7 @@ function sendEmail($email ,  $body , $subject)
         $mail->send();
         $_SESSION['email_sent'] = true;
 
-//        echo 'Email sent';
+        //        echo 'Email sent';
 
     } catch (Exception $e) {
         echo 'Email could not be sent. Error: ', $mail->ErrorInfo;

@@ -28,13 +28,13 @@
         </li>
         <li>
           <a  id="add" class="d-flex align-center fs-14 c-black rad-6 p-10" href="add.php">
-            <i class="fa-solid fa-gear fa-fw"></i>
+          <i class="fa-solid fa-file-circle-plus"></i>
             <span>إضافة بلاغ</span>
           </a>
         </li>
         <li>
           <a id="reports" class="d-flex align-center fs-14 c-black rad-6 p-10" href="reports.php">
-            <i class="fa-regular fa-user fa-fw"></i>
+          <i class="fa-solid fa-list"></i>
             <span>البلاغات</span>
           </a>
         </li>
@@ -45,14 +45,14 @@
           </a>
         </li>
         <li>
-          <a  id="account"   class="d-flex align-center fs-14 c-black rad-6 p-10" href="#">
-            <i class="fa-solid fa-graduation-cap fa-fw"></i>
+          <a  id="account"   class="d-flex align-center fs-14 c-black rad-6 p-10" href="account.php">
+            <i class="fa-regular fa-user fa-fw"></i>
             <span>الحساب</span>
           </a>
         </li>
         <li>
           <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="./Logout.php">
-            <i class="fa-regular fa-circle-user fa-fw"></i>
+          <i class="fa-solid fa-right-from-bracket"></i>
             <span>خروج</span>
           </a>
         </li>

@@ -115,6 +115,22 @@ ul {
   }
 }
 /* End Sidebar */
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+.shaking {
+  animation: shake 3s linear infinite;
+}
 /* Start Content */
 .content {
   overflow: hidden;
@@ -162,7 +178,7 @@ ul {
 .page h1 {
   margin: 20px 20px 40px;
 }
-.page h1::before,
+/* .page h1::before,
 .page h1::after {
   content: "";
   height: 3px;
@@ -177,7 +193,7 @@ ul {
 .page h1::after {
   background-color: black;
   width: 40px;
-}
+} */
 .wrapper {
   grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   margin-left: 20px;
@@ -299,8 +315,15 @@ ul {
  .succes{
 	font-size: 28px;
 
-		border: 2px solid #009688;
+		border: 2px solid #FF4B2B;
 	color: #009688;
+  background-color: #f1f5f9;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; 
+
 }
 
 .add p {

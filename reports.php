@@ -46,7 +46,9 @@ if (isset($_SESSION['user'])) {
               <table class="fs-15 w-full">
                 <thead>
                   <tr>
-                    <td>رقم الطلب</td>
+                    <td>رقم البلاغ</td>
+
+                  <td>رقم الطلب</td>
                     <td>المشكلة</td>
                     <td>ملاحظة</td>
                     <td>التحكم</td>
@@ -54,20 +56,14 @@ if (isset($_SESSION['user'])) {
                 </thead>
                 <tbody>
 
-                  <tr>
-                    <td>10 May 2022</td>
-                    <td>Ministry</td>
-                    <td>$5300</td>
-                    <td>
-                      <span class="label btn-shape bg-orange c-white">Pending</span>
-                    </td>
-
-                  </tr>
+      
 
                   <?php
+                        $counter = 1;
 
-                  foreach ($rows as $row) {
+                        foreach ($rows as $row) {
                     echo "<tr>";
+                          echo "<td>" . $counter . "</td>"; // New column for loop count
                     echo "<td>" . $row['report_number'] . "</td>";
                     echo "<td>" . $row['report_main'] . "</td>";
                     echo "<td>" . $row['report_details'] . "</td>";
@@ -145,7 +141,7 @@ if (isset($_SESSION['user'])) {
               <form action="?do=Update" method="post">
                 <input type="hidden" name="reportid" value="<?php echo $reportid; ?>">
 
-                <input class="rtl" type="number" name="number" placeholder="رقم الطلب"
+                <input class="rtl" type="text" name="number" placeholder="رقم الطلب"
                   value="<?php echo $row['report_number']; ?>" required />
                 <input class="rtl" type="text" name="main" placeholder="المشكلة" value="<?php echo $row['report_main']; ?>"
                   required />
@@ -224,7 +220,7 @@ if (isset($_SESSION['user'])) {
       if ($count2 > 0) {
 
 
-        echo "  <h1 class='succes'>
+        echo "  <h1 class='succes' id='hide'>
             تم التعديل بنجاح
             </h1>";
 
@@ -271,7 +267,7 @@ if (isset($_SESSION['user'])) {
             تم الحذف بنجاح
             </h1>";
 
-      header("refresh:1.5;url=reports.php");
+      header("refresh:2;url=reports.php");
 
 
     } else {
@@ -304,6 +300,12 @@ if (isset($_SESSION['user'])) {
       const activee = document.getElementById('reports');
       activee.classList.add("active");
 
+                          document.addEventListener("DOMContentLoaded", function() {
+            const h4Element = document.getElementById("hide");
+            setTimeout(function() {
+                h4Element.style.display = "none";
+            }, 2500); // 2000 milliseconds (2 seconds)
+            });
 
     </script>
 
